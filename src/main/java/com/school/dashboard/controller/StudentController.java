@@ -1,6 +1,7 @@
 package com.school.dashboard.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ public class StudentController {
 
 	private final StudentService studentService;
 	
+	@PreAuthorize("@studentAccessValidator.canAccessStudent(authentication, #rollNo)")
 	@GetMapping("/{rollNo}")
 	public ResponseEntity<Student> getStudentDashboard(@PathVariable String rollNo){
 	Student student = studentService.getStudentByRollNo(rollNo);

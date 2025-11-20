@@ -1,5 +1,7 @@
 package com.school.dashboard.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,21 +21,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	private Long id;
-	
-	@Column(nullable = false,unique = true)
-	private String email;
-	
-	 @Column(nullable = false)
-	    private String password;  // will store hashed password
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	    @Enumerated(EnumType.STRING)
-	    @Column(nullable = false)
-	    private Role role;
-	
-	
+    private String email;
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

@@ -3,6 +3,7 @@ package com.school.dashboard.service;
 import org.springframework.stereotype.Service;
 
 import com.school.dashboard.model.Student;
+import com.school.dashboard.model.User;
 import com.school.dashboard.repository.StudentRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,12 @@ public class StudentService {
 	return studentRepo.findByStudentRollNo(rollNo); 
 	}
 	
+	public Student createStudent(Student student, User user) {
+	    student.setUser(user);  // ⭐ Link student to user
+	    return studentRepo.save(student);
+	}
+
 	
 	
 
-
-	
 }
